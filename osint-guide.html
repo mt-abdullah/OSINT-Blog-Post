@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT 101: How to Geolocate a Photo</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* The Main Blog Container */
+        .blog-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+
+        /* Meta Data (Author, Date) */
+        .meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: block;
+        }
+        .img-caption {
+            text-align: center;
+            font-size: 0.85em;
+            color: #666;
+            margin-top: -15px;
+            margin-bottom: 30px;
+        }
+
+        /* Special Boxes (Alerts & Tips) */
+        .alert-box {
+            background-color: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        .pro-tip {
+            background-color: #e8f4fd;
+            border-left: 6px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Links */
+        a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blog-container">
+        <!-- Header Section -->
+        <h1>OSINT 101: How to Geolocate a Photo Like a Digital Detective</h1>
+        <p class="meta">By: <strong>Abdullah</strong> | Category: <strong>OSINT / Tutorials</strong> | Reading Time: <strong>5 Mins</strong></p>
+
+        <p>Have you ever looked at a photo on Instagram or a news report and asked, <em>"Where exactly is this?"</em></p>
+
+        <p>Maybe you want to verify a news story, or maybe you are participating in a "Capture the Flag" (CTF) challenge. Finding the real-world location of an image or video is called <strong>Geolocation</strong>, and it is one of the most essential skills in the OSINT (Open Source Intelligence) toolkit.</p>
+
+        <p>In this guide, I’m going to walk you through the exact workflow professional investigators use to turn a simple photo into a set of GPS coordinates.</p>
+
+        <!-- Warning Section -->
+        <div class="alert-box">
+            <strong>⚠️ The Golden Rule: Ethics</strong><br>
+            Before we begin, a warning: <strong>OSINT is for educational and investigative purposes only.</strong> Never use these techniques to stalk, harass, or doxx individuals. Exploring public landmarks is fine; tracking a person's home address is not.
+        </div>
+
+        <!-- Phase 1 -->
+        <h2>Phase 1: The "Sherlock" Scan (Observation)</h2>
+        <p>Most beginners make a mistake: they immediately upload the photo to Google. Stop. Look at the image first.</p>
+        <p>You are looking for <strong>distinctive artifacts</strong>. Use the <strong>PLWC</strong> method:</p>
+
+        <ul>
+            <li><strong>P - Plates & Text:</strong> Are there street signs? What language are they in? Can you see a license plate country code?</li>
+            <li><strong>L - Landscape:</strong> Are there mountains? Which side is the ocean on? What kind of trees are those?</li>
+            <li><strong>W - Weather & Shadows:</strong> Is it snowing? If the shadows are long, it's early morning or late afternoon.</li>
+            <li><strong>C - Construction:</strong> What do the electrical plugs look like? What side of the road are they driving on?</li>
+        </ul>
+
+        <!-- Image 1: Street Scene -->
+        <img src="https://images.unsplash.com/photo-1554797589-7241bb691973?q=80&w=1000&auto=format&fit=crop" alt="Street scene in Japan with signs">
+        <p class="img-caption"><em>Example: A street scene full of details—vertical signs (Asia), specific electrical poles, and yellow road markings.</em></p>
+
+        <div class="pro-tip">
+            <strong>💡 Pro Tip:</strong> Even the color of the road lines matters. For example, yellow central lines usually indicate the Americas, while white lines are common in Europe.
+        </div>
+
+        <!-- Phase 2 -->
+        <h2>Phase 2: Reverse Image Search (The Pivot)</h2>
+        <p>Once you have analyzed the details, it’s time to see if the internet recognizes the image. Don't rely on just one search engine. Different engines are good for different parts of the world.</p>
+
+        <h3>The "Big Three" Tools:</h3>
+        <ol>
+            <li><strong>Google Lens:</strong> The best all-rounder. Great for identifying landmarks and consumer products.</li>
+            <li><strong>Yandex Images:</strong> This Russian search engine is arguably <strong>the best OSINT tool for face and landscape matching</strong>, oftentimes outperforming Google when searching for locations in Europe or Asia.</li>
+            <li><strong>Bing Visual Search:</strong> Surprisingly good at cropping specific parts of an image (like a logo on a shirt) and finding matches.</li>
+        </ol>
+
+        <!-- Image 2: Technology/Search -->
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" alt="Computer screen showing code and data analysis">
+        <p class="img-caption"><em>Using multiple search engines (Multi-engine search) ensures you don't miss a match.</em></p>
+
+        <!-- Phase 3 -->
+        <h2>Phase 3: Satellite & Street View (The Verification)</h2>
+        <p>Let’s say your Reverse Image Search suggests the photo was taken in "Osaka, Japan." Now you need to confirm the exact street.</p>
+
+        <ul>
+            <li><strong>Google Earth Pro:</strong> This is free desktop software. It allows you to tilt the camera to see 3D terrain. If your photo has a mountain range in the background, use Google Earth to match the ridge line.</li>
+            <li><strong>Google Street View:</strong> Drop the little yellow man onto the map. Walk around the area.</li>
+        </ul>
+
+        <p><strong>The Matching Game:</strong> Look for "anchors"—objects that don't move. Does the crack in the sidewalk match? Is that same graffiti tag on the wall? Do the power lines cross the street at the same angle?</p>
+
+        <!-- Image 3: Map/Satellite -->
+        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1000&auto=format&fit=crop" alt="Aerial view of a city map">
+        <p class="img-caption"><em>Satellite imagery allows you to confirm the layout of buildings and roads from above.</em></p>
+
+        <h2>Summary: The Workflow</h2>
+        <p>Next time you see a mystery photo, follow this path:</p>
+        <ol>
+            <li><strong>Analyze</strong> the image for text, weather, and driving side.</li>
+            <li><strong>Reverse Search</strong> using Yandex and Google Lens.</li>
+            <li><strong>Crop</strong> distinct elements (buildings/signs) to search individually.</li>
+            <li><strong>Verify</strong> using Google Street View.</li>
+        </ol>
+
+        <h3>🔗 Useful Tools</h3>
+        <ul>
+            <li><a href="https://yandex.com/images" target="_blank">Yandex Images</a></li>
+            <li><a href="https://earth.google.com/" target="_blank">Google Earth</a></li>
+            <li><a href="https://suncalc.org" target="_blank">SunCalc</a> (For using shadows to determine time)</li>
+        </ul>
+
+        <div class="footer">
+            <p>Did you enjoy this guide? Share it with your team!</p>
+            <p>&copy; 2026 OSINT Blog. All rights reserved.</p>
+        </div>
+    </div>
+
+</body>
+</html>
